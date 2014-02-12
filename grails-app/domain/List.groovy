@@ -1,6 +1,6 @@
 class List {
     Integer id
-    Integer app
+    App app
     Integer userId
     String name
     Integer optIn

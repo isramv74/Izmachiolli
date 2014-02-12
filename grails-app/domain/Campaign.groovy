@@ -1,7 +1,7 @@
 class Campaign {
     Integer id
     Integer userId
-    Integer app
+    App app
     String fromName
     String fromEmail
     String replyTo
@@ -15,7 +15,7 @@ class Campaign {
     String timeOutCheck
     String opens
     Integer wysiwyg
-    String sendDate
+    Date sendDate
     String lists
     String timeZone
     String errors
