@@ -1,4 +1,4 @@
-class App {
+class Subscriber {
     Integer id
     Integer userId
     String name

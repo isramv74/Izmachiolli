@@ -113,3 +113,6 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+grails.plugin.awssdk.accessKey = {ACCESS_KEY}
+grails.plugin.awssdk.secretKey = {SECRET_KEY}
