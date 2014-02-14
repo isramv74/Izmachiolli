@@ -1,4 +1,11 @@
+package izmachiolli
+
 class App {
+
+    static constraints = {
+
+    }
+
     Integer id
     Integer userId
     String appName

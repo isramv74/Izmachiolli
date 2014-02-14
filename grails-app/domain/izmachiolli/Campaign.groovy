@@ -1,4 +1,9 @@
+package izmachiolli
+
 class Campaign {
+
+    static constraints = {
+    }
     Integer id
     Integer userId
     App app

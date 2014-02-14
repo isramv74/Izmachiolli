@@ -1,4 +1,9 @@
+package izmachiolli
+
 class List {
+
+    static constraints = {
+    }
     Integer id
     App app
     Integer userId

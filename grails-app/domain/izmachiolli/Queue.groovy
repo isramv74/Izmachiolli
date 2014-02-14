@@ -1,4 +1,9 @@
+package izmachiolli
+
 class Queue {
+
+    static constraints = {
+    }
     Integer id
     String queryStr
     Campaign campaign

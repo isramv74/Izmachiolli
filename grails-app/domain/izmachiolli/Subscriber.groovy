@@ -1,4 +1,10 @@
+package izmachiolli
+
 class Subscriber {
+
+    static constraints = {
+    }
+
     Integer id
     Integer userId
     String name
