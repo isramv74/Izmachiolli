@@ -4,6 +4,7 @@ class Campaign {
 
     static constraints = {
     }
+
     Integer id
     Integer userId
     App app
@@ -23,7 +24,8 @@ class Campaign {
     Date sendDate
     String lists
     String timeZone
-    String errors
+    String errores
     Integer bounceSetup
     Integer complaintSetup
+
 }
