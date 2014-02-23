@@ -5,7 +5,10 @@ import grails.plugin.awssdk.AmazonWebService
 
 class MailSenderController {
 
+    def amazonWebService
+
     def index() {
+
         String source = 'israel@draconiantech.com'
         Destination destination = new Destination(['asanchez@draconiantech.com'])
         Content subject = new Content('Some subject...')
@@ -14,7 +17,8 @@ class MailSenderController {
     Some <b>HTML</b> body...
     '''))
         Message message = new Message(subject, body)
-        def aWS = new AmazonWebService().getSes().sendEmail((new SendEmailRequest(source, destination, message)))
+        amazonWebService.ses.sendEmail(new SendEmailRequest(source, destination, message))
 
+        render "Mail sent to:"+destination.toAddresses
     }
 }
