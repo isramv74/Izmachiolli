@@ -9,23 +9,21 @@
 <html>
 <head>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-
+    <style>
+    .chart div {
+        font: 10px sans-serif;
+        background-color: steelblue;
+        text-align: right;
+        padding: 3px;
+        margin: 1px;
+        color: white;
+    }
+    </style>
     <title></title>
 </head>
 
 <body>
-<style>
 
-.chart div {
-    font: 10px sans-serif;
-    background-color: steelblue;
-    text-align: right;
-    padding: 3px;
-    margin: 1px;
-    color: white;
-}
-
-</style>
 <div class="chart"></div>
 <script>
     var data = [4, 8, 15, 16, 23, 42];
