@@ -19,6 +19,5 @@ class MailSenderController {
         Message message = new Message(subject, body)
         amazonWebService.ses.sendEmail(new SendEmailRequest(source, destination, message))
 
-        //render "Mail sent to:"+destination.toAddresses
     }
 }
