@@ -15,6 +15,8 @@
 <h1>Campaigns</h1>
 <h2>Test</h2>
     <g:form name="testForm" action="test">
+        <g:set var="cmp" value="${cmp}" scope="request"/>
+        <h3>${cmp.title}</h3>
         <label for="emailT">Test email</label>
         <g:textField name="emailT" size="100"/>
         <g:submitButton name="test" value="Test" />

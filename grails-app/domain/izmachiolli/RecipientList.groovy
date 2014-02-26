@@ -1,6 +1,6 @@
 package izmachiolli
 
-class List {
+class RecipientList {
 
     static constraints = {
     }

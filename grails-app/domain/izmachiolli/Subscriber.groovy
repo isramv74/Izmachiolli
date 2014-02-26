@@ -10,7 +10,7 @@ class Subscriber {
     String name
     String email
     String customFields
-    List list
+    RecipientList list
     Integer unsubscribed
     Integer bounced
     Integer bounceSoft
