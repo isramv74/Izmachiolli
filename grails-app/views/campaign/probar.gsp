@@ -15,10 +15,11 @@
 <h1>Campaigns</h1>
 <h2>Test</h2>
     <g:form name="testForm" action="test">
-        <g:set var="cmp" value="${cmp}" scope="request"/>
         <h3>${cmp.title}</h3>
+        <g:hiddenField name="idCmp" value="${cmp.id}" />
         <label for="emailT">Test email</label>
-        <g:textField name="emailT" size="100"/>
+        <g:textField name="emailT" size="50"/>
+        <br>
         <g:submitButton name="test" value="Test" />
         <g:actionSubmit value="Preview" action="preview" />
     </g:form>
