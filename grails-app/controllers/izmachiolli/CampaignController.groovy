@@ -14,6 +14,18 @@ class CampaignController {
         Campaign cmp = new Campaign()
         cmp.properties = params
         cmp.save()
+
+        //Se buscan links en htmlText y se guardan
+        def html = cmp.htmlText
+        def doc = new XmlSlurper().parseText(html)
+        doc.'**'.findAll { it.name() == "a" && it.@ref}.each {
+            Link lnk = new Link()
+            lnk.cmp=cmp
+            lnk.url="${it.@href.text()}"
+            println "Ash: "+lnk.url
+            lnk.save()
+        }
+
         [cmp:cmp]
     }
     def test(){
@@ -29,5 +41,11 @@ class CampaignController {
     def preview(){
         def htmlContent = Campaign.get(params.idCmp).htmlText
         render text: htmlContent, contentType:"text/html", encoding:"UTF-8"
+    }
+
+    def addLinks(){
+        def cmp = Campaign.get(params.idCmp)
+
+
     }
 }
