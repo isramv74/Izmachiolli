@@ -22,10 +22,8 @@ class CampaignController {
             Link lnk = new Link()
             lnk.cmp=cmp
             lnk.url="${it.@href.text()}"
-            println "Ash: "+lnk.url
             lnk.save()
         }
-
         [cmp:cmp]
     }
     def test(){
@@ -45,7 +43,10 @@ class CampaignController {
 
     def addLinks(){
         def cmp = Campaign.get(params.idCmp)
+        Link lnk=new Link()
+        lnk.cmp=cmp
+        def lnks=Link.findAll(lnk)
 
-
+        [lnks:lnks]
     }
 }

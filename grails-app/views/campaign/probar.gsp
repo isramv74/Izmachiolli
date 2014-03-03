@@ -22,6 +22,7 @@
         <br>
         <g:submitButton name="test" value="Test" />
         <g:actionSubmit value="Preview" action="preview" />
+        <g:actionSubmit value="Enlaces" action="addLinks" />
     </g:form>
 <h2>Schedule</h2>
 </body>
