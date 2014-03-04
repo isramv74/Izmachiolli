@@ -20,7 +20,7 @@
     <g:each in="${lnks}" status="jj" var="lnk">
     <tr>
             <td nowrap>${lnk.url}</td>
-            <td><g:textField name="prettyUrl"></g:textField></td>
+            <td>${lnk.prettyUrl}</td>
     </tr>
     </g:each>
         </table>

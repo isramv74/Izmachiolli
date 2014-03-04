@@ -18,13 +18,16 @@ class CampaignController {
         //Se buscan links en htmlText y se guardan
         def html = cmp.htmlText
         def doc = new XmlSlurper().parseText(html)
+        def lnks = []
         doc.'**'.findAll { it.name() == "a" && it.@ref}.each {
             Link lnk = new Link()
             lnk.cmp=cmp
             lnk.url="${it.@href.text()}"
             lnk.save()
+            lnks.add(lnk)
         }
-        [cmp:cmp]
+
+        [cmp:cmp,lnks:lnks]
     }
     def test(){
         def cmp = Campaign.get(params.idCmp)
@@ -42,11 +45,12 @@ class CampaignController {
     }
 
     def addLinks(){
-        def cmp = Campaign.get(params.idCmp)
-        Link lnk=new Link()
-        lnk.cmp=cmp
-        def lnks=Link.findAll(lnk)
+        println "En add"+params.lns[1]
 
-        [lnks:lnks]
+        params.lns.each(){
+            //save()
+            println "hola"
+            println prettyUrl
+        }
     }
 }

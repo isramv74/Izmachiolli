@@ -4,6 +4,8 @@ class Campaign {
     Integer id
 
     static constraints = {
+        htmlText(maxSize: 5000)
+        plainText(maxSize: 5000)
     }
 
     static mapping = {
