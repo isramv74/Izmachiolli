@@ -23,16 +23,17 @@
         <g:actionSubmit value="Preview" action="preview" />
         <br>
 <h2>Enlaces</h2>
+        <g:hiddenField name="lnkSize" value="${lnks.size()}"/>
         <table>
             <tr>
                 <th>URL</th>
                 <th>Friendly URL</th>
             </tr>
             <g:each in="${lnks}" status="st" var="lnk">
-                <g:hiddenField name="lns[$st].url" value="${lnk.url}" />
+                <g:hiddenField name="lns[${st}].id" value="${lnk.id}" />
                 <tr>
                     <td nowrap>${lnk.url}</td>
-                    <td><g:textField name="lns[$st].prettyUrl" value="${lnk.prettyUrl}"/></td>
+                    <td><g:textField name="lns[${st}].prettyUrl" value="${lnk.prettyUrl}"/></td>
                 </tr>
             </g:each>
         </table>

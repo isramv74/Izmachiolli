@@ -45,12 +45,11 @@ class CampaignController {
     }
 
     def addLinks(){
-        println "En add"+params.lns[1]
-
-        params.lns.each(){
-            //save()
-            println "hola"
-            println prettyUrl
+        def sz=params.int("lnkSize")
+        for (int i=0;i<sz;i++){
+            def lnk=Link.get(params.get("lns["+i+"].id"))
+            lnk.prettyUrl=params.get("lns["+i+"].prettyUrl")
+            lnk.save()
         }
     }
 }
