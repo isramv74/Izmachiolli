@@ -38,8 +38,11 @@
             </g:each>
         </table>
         <g:actionSubmit value="Guardar" action="addLinks" />
-    </g:form>
-<h2>Schedule</h2>
 
+<h2>Schedule</h2>
+        <g:datePicker name="sendDate"/>
+        <g:timeZoneSelect name="timeZone" />
+        <g:actionSubmit value="Agendar" action="schedule" />
+    </g:form>
 </body>
 </html>

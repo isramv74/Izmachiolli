@@ -11,10 +11,18 @@ class CampaignController {
     //def index() {}
     def crear(){}
     def probar(){
+        App ap=App.find{appName=="Ap Prueba"}
+        println "ASH "+ap
         Campaign cmp = new Campaign()
-        cmp.properties = params
-        cmp.save()
-
+        cmp.app=ap
+        cmp.title = params.title
+        cmp.fromName = params.fromName
+        cmp.fromEmail = params.fromEmail
+        cmp.replyTo = params.replyTo
+        cmp.htmlText = params.htmlText
+        cmp.plainText = params.plainText
+        cmp.save(failOnError: true)
+        println "ASH ID: "+cmp.id
         //Se buscan links en htmlText y se guardan
         def html = cmp.htmlText
         def doc = new XmlSlurper().parseText(html)
@@ -51,5 +59,13 @@ class CampaignController {
             lnk.prettyUrl=params.get("lns["+i+"].prettyUrl")
             lnk.save()
         }
+    }
+
+    def schedule(){
+        def cmp=Campaign.get(params.idCmp)
+        cmp.sendDate=params.sendDate
+        cmp.timeZone=params.timeZone
+        println "Ash: "+cmp.timeZone+" "+cmp.sendDate
+        cmp.save()
     }
 }

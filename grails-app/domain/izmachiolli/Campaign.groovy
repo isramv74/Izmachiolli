@@ -6,14 +6,17 @@ class Campaign {
     static constraints = {
         htmlText(maxSize: 5000)
         plainText(maxSize: 5000)
+        sendDate nullable:true
+        timeZone nullable:true
     }
 
     static mapping = {
         id generator: 'increment',name:'id'
+
     }
 
 //    Integer userId
-    //static belongsTo = [app:App]
+    static belongsTo = [app:App]
     String fromName
     String fromEmail
     String replyTo
@@ -27,9 +30,9 @@ class Campaign {
 //    String timeOutCheck
 //    String opens
 //    Integer wysiwyg
-  //  Date sendDate
+    Date sendDate
     //String lists
-//    String timeZone
+    String timeZone
 //    String errores
   //  Boolean bounceSetup
 //    Boolean complaintSetup
