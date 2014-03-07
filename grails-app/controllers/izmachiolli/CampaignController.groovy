@@ -12,7 +12,7 @@ class CampaignController {
     def crear(){}
     def probar(){
         App ap=App.find{appName=="Ap Prueba"}
-        println "ASH "+ap
+
         Campaign cmp = new Campaign()
         cmp.app=ap
         cmp.title = params.title
@@ -21,8 +21,13 @@ class CampaignController {
         cmp.replyTo = params.replyTo
         cmp.htmlText = params.htmlText
         cmp.plainText = params.plainText
-        cmp.save(failOnError: true)
-        println "ASH ID: "+cmp.id
+        cmp.save()
+
+        if(cmp.hasErrors()){
+            println cmp.errors
+            respond cmp,view:'crear'
+            return
+        }
         //Se buscan links en htmlText y se guardan
         def html = cmp.htmlText
         def doc = new XmlSlurper().parseText(html)

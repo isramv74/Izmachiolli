@@ -14,9 +14,10 @@
 <body>
 <h1><g:message code="campana.header.principal"></g:message></h1>
     <g:form name="myForm" action="probar" >
+        <g:renderErrors bean="${cmp}" />
         <label for="title"><g:message code="campana.label.title"/></label>
         <br/>
-        <g:textField name="title" size="50"/>
+        <g:textField name="title" value="" size="50"/>
         <br/>
         <label for="fromName"><g:message code="campana.label.fromName"/></label>
         <br/>

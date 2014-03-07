@@ -4,6 +4,12 @@ class Campaign {
     Integer id
 
     static constraints = {
+        fromName blank: false
+        fromEmail blank: false, email: true
+        replyTo blank: false, email: true
+        title blank: false
+        plainText blank: false
+        htmlText blank: false
         htmlText(maxSize: 5000)
         plainText(maxSize: 5000)
         sendDate nullable:true
