@@ -13,21 +13,21 @@
 
 <body>
 <h1>${cmp.title}</h1>
-<h2>Test</h2>
+<h2><g:message code="campana.header.test"/></h2>
     <g:form name="testForm" action="test">
         <g:hiddenField name="idCmp" value="${cmp.id}" />
-        <label for="emailT">Test email</label>
+        <label for="emailT"><g:message code="campana.label.testMail"/></label>
         <g:textField name="emailT" size="50"/>
         <br>
-        <g:submitButton name="test" value="Test" />
-        <g:actionSubmit value="Preview" action="preview" />
+        <g:submitButton name="test" value="${message(code: "campana.button.test")}" />
+        <g:actionSubmit value="${message(code: "campana.button.preview")}" action="preview" />
         <br>
-<h2>Enlaces</h2>
+<h2><g:message code="campana.header.links"/> </h2>
         <g:hiddenField name="lnkSize" value="${lnks.size()}"/>
         <table>
             <tr>
-                <th>URL</th>
-                <th>Friendly URL</th>
+                <th><g:message code="campana.tableH.url"/></th>
+                <th><g:message code="campana.tableH.prettyUrl"/> </th>
             </tr>
             <g:each in="${lnks}" status="st" var="lnk">
                 <g:hiddenField name="lns[${st}].id" value="${lnk.id}" />
@@ -37,12 +37,12 @@
                 </tr>
             </g:each>
         </table>
-        <g:actionSubmit value="Guardar" action="addLinks" />
+        <g:actionSubmit value="${message(code: "campana.button.save")}" action="addLinks" />
 
-<h2>Schedule</h2>
-        <g:datePicker name="sendDate"/>
-        <g:timeZoneSelect name="timeZone" />
-        <g:actionSubmit value="Agendar" action="schedule" />
+<h2><g:message code="campana.header.schedule"/> </h2>
+        <g:datePicker name="sendDate"/><br>
+        <g:timeZoneSelect name="timeZone" /><br>
+        <g:actionSubmit value="${message(code: "campana.button.schedule")}" action="schedule" />
     </g:form>
 </body>
 </html>
