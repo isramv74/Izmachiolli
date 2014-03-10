@@ -5,6 +5,7 @@ import com.amazonaws.services.simpleemail.model.Content
 import com.amazonaws.services.simpleemail.model.Destination
 import com.amazonaws.services.simpleemail.model.Message
 import com.amazonaws.services.simpleemail.model.SendEmailRequest
+import org.xml.sax.SAXParseException
 
 class CampaignController {
     def amazonWebService
@@ -24,20 +25,28 @@ class CampaignController {
         cmp.save()
 
         if(cmp.hasErrors()){
-            println cmp.errors
-            respond cmp,view:'crear'
+            println "Ash errores:"+cmp.errors
+            render view: 'crear', model: [cmp: cmp]
             return
         }
         //Se buscan links en htmlText y se guardan
         def html = cmp.htmlText
-        def doc = new XmlSlurper().parseText(html)
-        def lnks = []
-        doc.'**'.findAll { it.name() == "a" && it.@ref}.each {
-            Link lnk = new Link()
-            lnk.cmp=cmp
-            lnk.url="${it.@href.text()}"
-            lnk.save()
-            lnks.add(lnk)
+        try{
+            def doc = new XmlSlurper().parseText(html)
+
+            def lnks = []
+            doc.'**'.findAll { it.name() == "a" && it.@ref}.each {
+                Link lnk = new Link()
+                lnk.cmp=cmp
+                lnk.url="${it.@href.text()}"
+                lnk.save()
+                lnks.add(lnk)
+            }
+        }catch(SAXParseException e){
+           cmp.errors.reject('campaign.htmlText.format',['htmlText', 'class Campaign'] as Object[],'abcdef');
+            println "Ash: "+cmp.errors
+            render view: 'crear', model: [cmp: cmp]
+            return
         }
 
         [cmp:cmp,lnks:lnks]
