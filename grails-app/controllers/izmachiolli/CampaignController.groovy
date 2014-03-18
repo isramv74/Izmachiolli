@@ -1,85 +1,109 @@
 package izmachiolli
 
-import com.amazonaws.services.simpleemail.model.Body
-import com.amazonaws.services.simpleemail.model.Content
-import com.amazonaws.services.simpleemail.model.Destination
-import com.amazonaws.services.simpleemail.model.Message
-import com.amazonaws.services.simpleemail.model.SendEmailRequest
-import org.xml.sax.SAXParseException
 
+
+import static org.springframework.http.HttpStatus.*
+import grails.transaction.Transactional
+
+@Transactional(readOnly = true)
 class CampaignController {
-    def amazonWebService
-    //def index() {}
-    def crear(){}
-    def probar(){
-        App ap=App.find{appName=="Ap Prueba"}
 
-        Campaign cmp = new Campaign()
-        cmp.app=ap
-        cmp.title = params.title
-        cmp.fromName = params.fromName
-        cmp.fromEmail = params.fromEmail
-        cmp.replyTo = params.replyTo
-        cmp.htmlText = params.htmlText
-        cmp.plainText = params.plainText
-        cmp.save()
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-        if(cmp.hasErrors()){
-            println "Ash errores:"+cmp.errors
-            render view: 'crear', model: [cmp: cmp]
+    def index(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        respond Campaign.list(params), model: [campaignInstanceCount: Campaign.count()]
+    }
+
+    def show(Campaign campaignInstance) {
+        respond campaignInstance
+    }
+
+    def create() {
+        respond new Campaign(params)
+    }
+
+    @Transactional
+    def save(Campaign campaignInstance) {
+        if (campaignInstance == null) {
+            notFound()
             return
         }
-        //Se buscan links en htmlText y se guardan
-        def html = cmp.htmlText
-        try{
-            def doc = new XmlSlurper().parseText(html)
 
-            def lnks = []
-            doc.'**'.findAll { it.name() == "a" && it.@ref}.each {
-                Link lnk = new Link()
-                lnk.cmp=cmp
-                lnk.url="${it.@href.text()}"
-                lnk.save()
-                lnks.add(lnk)
+        if (campaignInstance.hasErrors()) {
+            respond campaignInstance.errors, view: 'create'
+            return
+        }
+
+        campaignInstance.save flush: true
+
+        request.withFormat {
+            form {
+                flash.message = message(code: 'default.created.message', args: [message(code: 'campaignInstance.label', default: 'Campaign'), campaignInstance.id])
+                redirect campaignInstance
             }
-        }catch(SAXParseException e){
-           cmp.errors.reject('campaign.htmlText.format',['htmlText', 'class Campaign'] as Object[],'abcdef');
-            println "Ash: "+cmp.errors
-            render view: 'crear', model: [cmp: cmp]
+            '*' { respond campaignInstance, [status: CREATED] }
+        }
+    }
+
+    def edit(Campaign campaignInstance) {
+        respond campaignInstance
+    }
+
+    @Transactional
+    def update(Campaign campaignInstance) {
+        if (campaignInstance == null) {
+            notFound()
             return
         }
 
-        [cmp:cmp,lnks:lnks]
-    }
-    def test(){
-        def cmp = Campaign.get(params.idCmp)
+        if (campaignInstance.hasErrors()) {
+            respond campaignInstance.errors, view: 'edit'
+            return
+        }
 
-        Destination destination = new Destination([params.emailT])
-        Content subject = new Content(cmp.title)
-        Body body = new Body().withHtml(new Content(cmp.htmlText))
-        Message message = new Message(subject, body)
-        amazonWebService.ses.sendEmail(new SendEmailRequest(cmp.fromEmail, destination, message))
+        campaignInstance.save flush: true
 
-    }
-    def preview(){
-        def htmlContent = Campaign.get(params.idCmp).htmlText
-        render text: htmlContent, contentType:"text/html", encoding:"UTF-8"
-    }
-
-    def addLinks(){
-        def sz=params.int("lnkSize")
-        for (int i=0;i<sz;i++){
-            def lnk=Link.get(params.get("lns["+i+"].id"))
-            lnk.prettyUrl=params.get("lns["+i+"].prettyUrl")
-            lnk.save()
+        request.withFormat {
+            form {
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'Campaign.label', default: 'Campaign'), campaignInstance.id])
+                redirect campaignInstance
+            }
+            '*' { respond campaignInstance, [status: OK] }
         }
     }
 
-    def schedule(){
-        def cmp=Campaign.get(params.idCmp)
-        cmp.sendDate=params.sendDate
-        cmp.timeZone=params.timeZone
-        println "Ash: "+cmp.timeZone+" "+cmp.sendDate
-        cmp.save()
+    @Transactional
+    def delete(Campaign campaignInstance) {
+
+        if (campaignInstance == null) {
+            notFound()
+            return
+        }
+
+        campaignInstance.delete flush: true
+
+        request.withFormat {
+            form {
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Campaign.label', default: 'Campaign'), campaignInstance.id])
+                redirect action: "index", method: "GET"
+            }
+            '*' { render status: NO_CONTENT }
+        }
+    }
+
+    protected void notFound() {
+        request.withFormat {
+            form {
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'campaignInstance.label', default: 'Campaign'), params.id])
+                redirect action: "index", method: "GET"
+            }
+            '*' { render status: NOT_FOUND }
+        }
+    }
+
+    def preview(Campaign campaignInstance){
+        def htmlContent = campaignInstance.htmlText
+        render text: htmlContent, contentType:"text/html", encoding:"UTF-8"
     }
 }
