@@ -119,14 +119,13 @@ class CampaignController {
         Destination destination = new Destination([params.testMail])
         Content subject = new Content(campaignInstance.title)
         Body body = new Body().withHtml(new Content(campaignInstance.htmlText))
-        Message message = new Message(subject, body)
+        Message mssg = new Message(subject, body)
         try{
-            amazonWebService.ses.sendEmail(new SendEmailRequest(campaignInstance.fromEmail, destination, message))
-            redirect action: "index", method: "GET"
+            amazonWebService.ses.sendEmail(new SendEmailRequest(campaignInstance.fromEmail, destination, mssg))
+            flash.message = message(code: 'campaign.testSent.message')
         }catch(Exception e){
-            println e.message
-            //flash.message = message(code: 'campaign.testError.message')
-           // redirect action: "index", method: "GET"
+            flash.error = message(code: 'campaign.testError.message')
         }
+        redirect action: "test", method: "GET"
     }
 }
