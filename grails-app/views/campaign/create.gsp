@@ -38,7 +38,7 @@
                 <g:message code="campaign.title.label" default="Title"/>
                 <span class="required-indicator">*</span>
             </label>
-            <g:textField name="title" required="" value="${campaignInstance?.title}"/>
+            <g:textField name="title" required="" value="${campaignInstance?.title}" size="40"/>
         </div>
 
         <div class="fieldcontain ${hasErrors(bean: campaignInstance, field: 'fromName', 'error')} required">
@@ -46,7 +46,7 @@
                 <g:message code="campaign.fromName.label" default="From Name"/>
                 <span class="required-indicator">*</span>
             </label>
-            <g:textField name="fromName" required="" value="${campaignInstance?.fromName}"/>
+            <g:textField name="fromName" required="" value="${campaignInstance?.fromName}" size="40"/>
         </div>
 
         <div class="fieldcontain ${hasErrors(bean: campaignInstance, field: 'fromEmail', 'error')} required">
@@ -54,7 +54,7 @@
                 <g:message code="campaign.fromEmail.label" default="From Email"/>
                 <span class="required-indicator">*</span>
             </label>
-            <g:field type="email" name="fromEmail" required="" value="${campaignInstance?.fromEmail}"/>
+            <g:field type="email" name="fromEmail" required="" value="${campaignInstance?.fromEmail}" size="40"/>
         </div>
 
         <div class="fieldcontain ${hasErrors(bean: campaignInstance, field: 'replyTo', 'error')} required">
@@ -62,7 +62,7 @@
                 <g:message code="campaign.replyTo.label" default="Reply To"/>
                 <span class="required-indicator">*</span>
             </label>
-            <g:field type="email" name="replyTo" required="" value="${campaignInstance?.replyTo}"/>
+            <g:field type="email" name="replyTo" required="" value="${campaignInstance?.replyTo}" size="40"/>
         </div>
 
         <div class="fieldcontain ${hasErrors(bean: campaignInstance, field: 'htmlText', 'error')} required">

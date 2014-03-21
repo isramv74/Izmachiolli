@@ -5,6 +5,7 @@ import com.amazonaws.services.simpleemail.model.Content
 import com.amazonaws.services.simpleemail.model.Destination
 import com.amazonaws.services.simpleemail.model.Message
 import com.amazonaws.services.simpleemail.model.SendEmailRequest
+import org.xml.sax.SAXParseException
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -33,7 +34,21 @@ class CampaignController {
             notFound()
             return
         }
+        def html = campaignInstance.htmlText
+        try{
+            def doc = new XmlSlurper().parseText(html)
 
+            def lnks = []
+            doc.'**'.findAll { it.name() == "a" && it.@ref}.each {
+                Link lnk = new Link()
+                lnk.cmp=campaignInstance
+                lnk.url="${it.@href.text()}"
+                lnk.save()
+                lnks.add(lnk)
+            }
+        }catch(SAXParseException e){
+            campaignInstance.errors.reject('campaign.htmlText.format',['htmlText', 'class Campaign'] as Object[],'Error');
+        }
         if (campaignInstance.hasErrors()) {
             respond campaignInstance.errors, view: 'create'
             return

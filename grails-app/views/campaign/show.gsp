@@ -17,6 +17,8 @@
         <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]"/></g:link></li>
         <li><g:link class="create" action="create"><g:message code="default.new.label"
                                                               args="[entityName]"/></g:link></li>
+        <li><g:link class="list" action="preview" resource="${campaignInstance}"><g:message
+                code="campaign.button.preview"/></g:link></li>
     </ul>
 </div>
 
@@ -110,8 +112,8 @@
                             onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>
             <g:link class="edit" action="test" resource="${campaignInstance}"><g:message
                     code="campaign.button.test"/></g:link>
-            <g:link class="delete" action="preview" resource="${campaignInstance}"><g:message
-                    code="campaign.button.preview"/></g:link>
+            <g:link class="delete" action="linksConfig" resource="${campaignInstance}"><g:message
+                    code="campaign.button.linksConfig"/></g:link>
         </fieldset>
     </g:form>
 </div>
