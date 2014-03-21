@@ -112,7 +112,7 @@
                             onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>
             <g:link class="edit" action="test" resource="${campaignInstance}"><g:message
                     code="campaign.button.test"/></g:link>
-            <g:link class="delete" action="linksConfig" resource="${campaignInstance}"><g:message
+            <g:link class="delete" action="addLinks" resource="${campaignInstance}"><g:message
                     code="campaign.button.linksConfig"/></g:link>
         </fieldset>
     </g:form>

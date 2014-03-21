@@ -30,23 +30,16 @@ class CampaignController {
 
     @Transactional
     def save(Campaign campaignInstance) {
+        def doc
         if (campaignInstance == null) {
             notFound()
             return
         }
         def html = campaignInstance.htmlText
         try{
-            def doc = new XmlSlurper().parseText(html)
-
-            def lnks = []
-            doc.'**'.findAll { it.name() == "a" && it.@ref}.each {
-                Link lnk = new Link()
-                lnk.cmp=campaignInstance
-                lnk.url="${it.@href.text()}"
-                lnk.save()
-                lnks.add(lnk)
-            }
-        }catch(SAXParseException e){
+            doc = new XmlSlurper().parseText(html)
+        }catch(Exception e){
+            println e.message
             campaignInstance.errors.reject('campaign.htmlText.format',['htmlText', 'class Campaign'] as Object[],'Error');
         }
         if (campaignInstance.hasErrors()) {
@@ -55,6 +48,16 @@ class CampaignController {
         }
 
         campaignInstance.save flush: true
+
+        def lnks = []
+        doc.'**'.findAll { it.name() == "a" && it.@ref}.each {
+            Link lnk = new Link()
+            lnk.cmp=campaignInstance
+            lnk.url="${it.@href.text()}"
+            lnk.save flush:true
+            lnks.add(lnk)
+        }
+        campaignInstance.links=lnks
 
         request.withFormat {
             form {
@@ -142,5 +145,9 @@ class CampaignController {
             flash.error = message(code: 'campaign.testError.message')
         }
         redirect action: "test", method: "GET"
+    }
+
+    def addLinks(Campaign campaignInstance){
+        respond campaignInstance
     }
 }
