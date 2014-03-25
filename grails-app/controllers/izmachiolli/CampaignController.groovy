@@ -150,4 +150,14 @@ class CampaignController {
     def addLinks(Campaign campaignInstance){
         respond campaignInstance
     }
+
+    def saveLinks(Campaign campaignInstance){
+        def sz=params.int("lnkSize")
+        for (int i=0;i<sz;i++){
+            def lnk=Link.get(params.get("lns["+i+"].id"))
+            lnk.prettyUrl=params.get("lns["+i+"].prettyUrl")
+            lnk.cmp=campaignInstance
+            lnk.save()
+        }
+    }
 }

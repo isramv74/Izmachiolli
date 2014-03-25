@@ -13,13 +13,13 @@
 
 <div class="nav" role="navigation">
     <ul>
-        <!--li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li-->
-        <li><g:link class="create" action="create"><g:message code="campaign.new.label"
-                                                              args="[entityName]"/></g:link></li>
+        <li><g:link class="list" action="show" resource="${campaignInstance}"><g:message code="campaign.return.label"/></g:link></li>
     </ul>
 </div>
 
 <div id="list-campaign" class="content scaffold-list" role="main">
+    <g:form url="[resource: campaignInstance, action: 'saveLinks']">
+        <g:hiddenField name="lnkSize" value="${campaignInstance.links.size()}"/>
     <h1><g:message code="campaign.header.principal"/></h1>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
@@ -27,18 +27,26 @@
     <table>
         <thead>
         <tr>
-            <g:sortableColumn property="title" title="${message(code: 'campaign.title.label', default: 'Title')}"/>
+            <g:sortableColumn property="title" title="${message(code: 'campaign.tableH.url')}"/>
+            <g:sortableColumn property="title" title="${message(code: 'campaign.tableH.prettyUrl')}"/>
         </tr>
         </thead>
         <tbody>
         <g:each in="${campaignInstance.links}" status="i" var="lnk">
+
+            <g:hiddenField name="lns[${i}].id" value="${lnk.id}" />
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                     <td >${lnk.url}</td>
-                    <td>${lnk.prettyUrl}</td>
+                    <td><g:field type="text" name="lns[${i}].prettyUrl" value="${lnk.prettyUrl}" size="50"/></td>
             </tr>
         </g:each>
         </tbody>
     </table>
+    <fieldset class="buttons">
+        <g:submitButton name="save" class="save"
+                        value="${message(code: 'campaign.button.save')}"/>
+    </fieldset>
+    </g:form>
 </div>
 </body>
 </html>
