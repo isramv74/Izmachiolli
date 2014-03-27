@@ -18,7 +18,7 @@
         <li><g:link class="create" action="create"><g:message code="default.new.label"
                                                               args="[entityName]"/></g:link></li>
         <li><g:link class="list" action="preview" resource="${campaignInstance}"><g:message
-                code="campaign.button.preview"/></g:link></li>
+                code="default.button.preview"/></g:link></li>
     </ul>
 </div>
 
