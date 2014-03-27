@@ -14,6 +14,6 @@ This disables forked mode for run
 
 Comment other forked configuration.
 
-Campañas: http://localhost:8080/Izmachiolli/campaign/index
+Menú Principal: http://localhost:8080/Izmachiolli/index
 
 

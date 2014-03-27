@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main"/>
-		<title>Welcome to Grails</title>
+		<title>Izmachiolli</title>
 		<style type="text/css" media="screen">
 			#status {
 				background-color: #eee;
@@ -82,8 +82,8 @@
 	</head>
 	<body>
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div id="status" role="complementary">
-			<h1>Application Status</h1>
+		<!--div id="status" role="complementary">
+			<h1>Menú Principal</h1>
 			<ul>
 				<li>App version: <g:meta name="app.version"/></li>
 				<li>Grails version: <g:meta name="app.grails.version"/></li>
@@ -101,21 +101,18 @@
 					<li>${plugin.name} - ${plugin.version}</li>
 				</g:each>
 			</ul>
-		</div>
+		</div-->
 		<div id="page-body" role="main">
-			<h1>Welcome to Grails</h1>
-			<p>Congratulations, you have successfully started your first Grails application! At the moment
-			   this is the default page, feel free to modify it to either redirect to a controller or display whatever
-			   content you may choose. Below is a list of controllers that are currently deployed in this application,
-			   click on each to execute its default action:</p>
+			<h1>${message(code:'main.menu.title')}</h1>
+
 
 			<div id="controller-list" role="navigation">
-				<h2>Available Controllers:</h2>
 				<ul>
-					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-						<li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
-					</g:each>
+					<li><h2><g:link action="index" controller="campaign">${message(code:'campaign.header.principal')}</g:link></h2></li>
 				</ul>
+                <ul>
+                    <li><h2><g:link action="create" controller="site">${message(code:'site.header.principal')}</g:link></h2></li>
+                </ul>
 			</div>
 		</div>
 	</body>
