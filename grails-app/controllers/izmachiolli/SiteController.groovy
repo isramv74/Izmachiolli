@@ -119,4 +119,8 @@ class SiteController {
             return false
         }
     }
+
+    def preview(Site siteInstance){
+        render (template: 'site', bean: siteInstance)
+    }
 }
