@@ -83,6 +83,12 @@ grails.exceptionresolver.params.exclude = ['password']
 // configure auto-caching of queries by default (if false you can cache individual queries with 'cache: true')
 grails.hibernate.cache.queries = false
 
+//AWS SDK
+grails.plugin.awssdk.accessKey = "your access key"
+grails.plugin.awssdk.secretKey = "your secret key"
+grails.plugin.awssdk.region = 'your zone'
+
+
 environments {
     development {
         grails.logging.jul.usebridge = true
