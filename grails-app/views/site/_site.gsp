@@ -5,22 +5,22 @@
 </head>
 <body>
     <div>
-        <div id="header">
-            ${it.header}
+        <div id="header" style="height:'${headerH}%'">
+            ${header}
         </div>
         <div id="content">
-            <div id="left">
-                ${it.left}
+            <div id="left" style="width: '${leftW}%'">
+                ${left}
             </div>
             <div id="body">
                 ${body}
             </div>
-            <div id="right">
-                ${it.right}
+            <div id="right"  style="width: '${rightW}%'">
+                ${right}
             </div>
         </div>
-        <div id="footer">
-            ${it.footer}
+        <div id="footer" style="height:'${footerH}%'">
+            ${footer}
         </div>
     </div>
 </body>

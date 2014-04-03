@@ -121,6 +121,15 @@ class SiteController {
     }
 
     def preview(Site siteInstance){
-        render (template: 'site', bean: siteInstance)
+        def header=siteInstance.header!=null?new XmlSlurper().parseText(siteInstance.header):""
+        def headerH=(siteInstance.header!=null?siteInstance.headerHeight:0)
+        def footer=siteInstance.footer!=null?new XmlSlurper().parseText(siteInstance.footer):""
+        def footerH=(siteInstance.footer!=null?siteInstance.footerHeight:0)
+        def right=siteInstance.right!=null?new XmlSlurper().parseText(siteInstance.right):""
+        def rightW=(siteInstance.right!=null?siteInstance.rightWidth:0)
+        def left=siteInstance.left!=null?new XmlSlurper().parseText(siteInstance.left):""
+        def leftW=(siteInstance.left!=null?siteInstance.leftWidth:0)
+        render (template: 'site', model: [header:header,headerH:headerH,footer: footer,footerH:footerH,
+                right: right,rightW:rightW,left:left,leftW:leftW])
     }
 }
