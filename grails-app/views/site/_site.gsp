@@ -5,23 +5,13 @@
 </head>
 <body>
     <div>
-        <div id="header" style="height:'${headerH}%'">
-            ${header}
-        </div>
+        <izm:header height="${headerH}" content="${header}"/>
         <div id="content">
-            <div id="left" style="width: '${leftW}%'">
-                ${left}
-            </div>
-            <div id="body">
-                ${body}
-            </div>
-            <div id="right"  style="width: '${rightW}%'">
-                ${right}
-            </div>
+            <izm:left width="${leftW}" content="${left}"/>
+            <izm:body content="${body}"/>
+            <izm:right width="${rightW}" content="${right}"/>
         </div>
-        <div id="footer" style="height:'${footerH}%'">
-            ${footer}
-        </div>
+        <izm:footer height="${footerH}" content="${footer}"/>
     </div>
 </body>
 </html>

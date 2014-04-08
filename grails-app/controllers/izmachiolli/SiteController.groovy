@@ -1,6 +1,6 @@
 package izmachiolli
 
-
+import org.springframework.web.util.HtmlUtils
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -56,14 +56,32 @@ class SiteController {
             return
         }
 
-        if(siteInstance.header!=null && !validateHTML(siteInstance.header))
-            siteInstance.errors.reject('site.header.format',['header', 'class Site'] as Object[],'Error');
-        if(siteInstance.footer!=null && !validateHTML(siteInstance.footer))
-            siteInstance.errors.reject('site.footer.format',['footer', 'class Site'] as Object[],'Error');
-        if(siteInstance.left!=null && !validateHTML(siteInstance.left))
-            siteInstance.errors.reject('site.left.format',['left', 'class Site'] as Object[],'Error');
-        if(siteInstance.right!=null && !validateHTML(siteInstance.right))
-            siteInstance.errors.reject('site.right.format',['right', 'class Site'] as Object[],'Error');
+        if(siteInstance.header!=null){
+            if(!validateHTML(siteInstance.header))
+                siteInstance.errors.reject('site.header.format',['header', 'class Site'] as Object[],'Error');
+            else if(siteInstance.headerHeight==null)
+                siteInstance.errors.reject('site.headerHeight.blank',['headerHeight', 'class Site'] as Object[],'Error');
+        }
+        if(siteInstance.footer!=null){
+            if(!validateHTML(siteInstance.footer))
+                siteInstance.errors.reject('site.footer.format',['footer', 'class Site'] as Object[],'Error');
+            else if(siteInstance.footerHeight==null)
+                siteInstance.errors.reject('site.footerHeight.blank',['footerHeight', 'class Site'] as Object[],'Error');
+        }
+
+        if(siteInstance.left!=null){
+            if(!validateHTML(siteInstance.left))
+                siteInstance.errors.reject('site.left.format',['left', 'class Site'] as Object[],'Error');
+            else if(siteInstance.leftWidth==null)
+                siteInstance.errors.reject('site.leftWidth.blank',['leftWidth', 'class Site'] as Object[],'Error');
+        }
+
+        if(siteInstance.right!=null){
+            if(!validateHTML(siteInstance.right))
+                siteInstance.errors.reject('site.right.format',['right', 'class Site'] as Object[],'Error');
+            else if(siteInstance.rightWidth==null)
+                siteInstance.errors.reject('site.rightWidth.blank',['rightWidth', 'class Site'] as Object[],'Error');
+        }
 
         if (siteInstance.hasErrors()) {
             respond siteInstance.errors, view: 'edit'
@@ -121,15 +139,15 @@ class SiteController {
     }
 
     def preview(Site siteInstance){
-        def header=siteInstance.header!=null?new XmlSlurper().parseText(siteInstance.header):""
+        def header=siteInstance.header!=null?siteInstance.header:""
         def headerH=(siteInstance.header!=null?siteInstance.headerHeight:0)
-        def footer=siteInstance.footer!=null?new XmlSlurper().parseText(siteInstance.footer):""
+        def footer=siteInstance.footer!=null?siteInstance.footer:""
         def footerH=(siteInstance.footer!=null?siteInstance.footerHeight:0)
-        def right=siteInstance.right!=null?new XmlSlurper().parseText(siteInstance.right):""
+        def right=siteInstance.right!=null?siteInstance.right:""
         def rightW=(siteInstance.right!=null?siteInstance.rightWidth:0)
-        def left=siteInstance.left!=null?new XmlSlurper().parseText(siteInstance.left):""
+        def left=siteInstance.left!=null? siteInstance.left:""
         def leftW=(siteInstance.left!=null?siteInstance.leftWidth:0)
         render (template: 'site', model: [header:header,headerH:headerH,footer: footer,footerH:footerH,
-                right: right,rightW:rightW,left:left,leftW:leftW])
+                right: right,rightW:rightW,left:left,leftW:leftW,body:'<h1>Prueba Minisitio</h1>'])
     }
 }
