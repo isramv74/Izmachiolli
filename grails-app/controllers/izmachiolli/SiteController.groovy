@@ -148,6 +148,6 @@ class SiteController {
         def left=siteInstance.left!=null? siteInstance.left:""
         def leftW=(siteInstance.left!=null?siteInstance.leftWidth:0)
         render (template: 'site', model: [header:header,headerH:headerH,footer: footer,footerH:footerH,
-                right: right,rightW:rightW,left:left,leftW:leftW,body:'<h1>Prueba Minisitio</h1>'])
+                right: right,rightW:rightW,left:left,leftW:leftW,body:'<h1>'+ message(code: 'site.preview.content')+'</h1>'])
     }
 }
