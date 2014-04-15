@@ -29,10 +29,9 @@ class Campaign {
     String title
     String plainText
     String htmlText
-    static hasMany = [links:Link]
+    static hasMany = [links:Link,toSendLists:RecipientList]
     //Boolean sent
     //Integer toSend
-   // static hasMany = [toSendLists:RecipientList]
 //    Integer recipients
 //    String timeOutCheck
 //    String opens

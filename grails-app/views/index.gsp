@@ -111,6 +111,9 @@
 					<li><h2><g:link action="index" controller="campaign">${message(code:'campaign.header.principal')}</g:link></h2></li>
 				</ul>
                 <ul>
+                    <li><h2><g:link action="index" controller="recipientList">${message(code:'recipientList.header.principal')}</g:link></h2></li>
+                </ul>
+                <ul>
                     <li><h2><g:link action="show" controller="site" id="1">${message(code:'site.header.principal')}</g:link></h2></li>
                 </ul>
 			</div>
