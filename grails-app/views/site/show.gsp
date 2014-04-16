@@ -11,7 +11,7 @@
 		<a href="#show-site" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
-                <li><g:link uri="/"><g:message code="campaign.return.label"/></g:link></li>
+                <li><g:link uri="/"><g:message code="default.navigate.back"/></g:link></li>
 			</ul>
 		</div>
 		<div id="show-site" class="content scaffold-show" role="main">

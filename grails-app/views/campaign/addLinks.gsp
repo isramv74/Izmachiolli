@@ -13,7 +13,7 @@
 
 <div class="nav" role="navigation">
     <ul>
-        <li><g:link class="list" action="show" resource="${campaignInstance}"><g:message code="campaign.return.label"/></g:link></li>
+        <li><g:link class="list" action="show" resource="${campaignInstance}"><g:message code="default.navigate.back"/></g:link></li>
     </ul>
 </div>
 

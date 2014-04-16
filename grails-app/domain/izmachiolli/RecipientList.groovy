@@ -35,7 +35,7 @@ class RecipientList {
     String goodbyeMessage
     String confirmationSubject
     String confirmationMessage
-    Boolean unsubscribeAllList
+    Boolean unsubscribeAllLists
     //String customFields
     //Integer prevCount
     //Integer currentlyProcessing

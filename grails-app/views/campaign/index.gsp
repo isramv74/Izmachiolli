@@ -13,6 +13,7 @@
 
 <div class="nav" role="navigation">
     <ul>
+        <li><g:link uri="/"><g:message code="default.navigate.back"/></g:link></li>
         <!--li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li-->
         <li><g:link class="create" action="create"><g:message code="campaign.new.label"
                                                               args="[entityName]"/></g:link></li>
