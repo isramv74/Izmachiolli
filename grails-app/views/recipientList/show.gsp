@@ -149,11 +149,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${recipientListInstance?.unsubscribeAllList}">
+				<g:if test="${recipientListInstance?.unsubscribeAllLists}">
 				<li class="fieldcontain">
-					<span id="unsubscribeAllList-label" class="property-label"><g:message code="recipientList.unsubscribeAllList.label" default="Unsubscribe All List" /></span>
+					<span id="unsubscribeAllLists-label" class="property-label"><g:message code="recipientList.unsubscribeAllLists.label" default="Unsubscribe All List" /></span>
 					
-						<span class="property-value" aria-labelledby="unsubscribeAllList-label"><g:formatBoolean boolean="${recipientListInstance?.unsubscribeAllList}" /></span>
+						<span class="property-value" aria-labelledby="unsubscribeAllLists-label"><g:formatBoolean boolean="${recipientListInstance?.unsubscribeAllLists}" /></span>
 					
 				</li>
 				</g:if>
@@ -163,7 +163,9 @@
 				<fieldset class="buttons">
 					<g:link class="edit" action="edit" resource="${recipientListInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-				</fieldset>
+                    <g:link class="create" action="addSusc" resource="${recipientListInstance}"><g:message code="recipientList.button.addSusc.label"  /></g:link>
+                    <g:link class="create" action="deleteSusc" resource="${recipientListInstance}"><g:message code="recipientList.button.deleteSusc.label" /></g:link>
+                </fieldset>
 			</g:form>
 		</div>
 	</body>

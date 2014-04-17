@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'recipientList.label', default: 'RecipientList')}" />
 		<title><g:message code="recipientList.new.label"/></title>
