@@ -4,9 +4,9 @@ class RecipientList {
 
     static constraints = {
         name blank: false
-        confirmUrl  nullable: true
-        subscribeUrl nullable: true
-        unsubscribeUrl nullable: true
+        confirmUrl  nullable: true, url:true
+        subscribeUrl nullable: true, url:true
+        unsubscribeUrl nullable: true, url:true
         thankYouSubject nullable: true
         thankYouMessage nullable: true, maxSize: 5000
         goodbyeSubject  nullable: true

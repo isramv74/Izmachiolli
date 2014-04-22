@@ -30,6 +30,8 @@ class RecipientListController {
             return
         }
 
+        validarDatos(recipientListInstance);
+
         if (recipientListInstance.hasErrors()) {
             respond recipientListInstance.errors, view: 'create'
             return
@@ -100,5 +102,19 @@ class RecipientListController {
             }
             '*' { render status: NOT_FOUND }
         }
+    }
+
+    private void validarDatos(RecipientList recListInst)
+    {
+        if(recListInst.thankYou && (recListInst.thankYouMessage == null || recListInst.thankYouSubject==null)){
+            recListInst.errors.reject('recipientList.thankYou.missing',['thankYouMessage', 'class RecipientList'] as Object[],'Error');
+        }
+        if(recListInst.optIn && (recListInst.confirmUrl == null || recListInst.confirmationSubject==null || recListInst.confirmationMessage==null)){
+            recListInst.errors.reject('recipientList.confirmation.missing',['confirmationMessage', 'class RecipientList'] as Object[],'Error');
+        }
+        if(recListInst.goodbye && (recListInst.goodbyeMessage == null || recListInst.goodbyeSubject == null || recListInst.unsubscribeUrl==null)){
+            recListInst.errors.reject('recipientList.goodbye.missing',['goodbyeMessage', 'class RecipientList'] as Object[],'Error');
+        }
+
     }
 }
