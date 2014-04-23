@@ -23,4 +23,25 @@
 			<table>
 			<thead>
 					<tr>
+                        <g:sortableColumn property="name" title="${message(code: 'recipientList.name.label', default: 'Name')}" />
+
+                    </tr>
+            </thead>
+                <tbody>
+                <g:each in="${recipientListInstanceList}" status="i" var="recipientListInstance">
+                    <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+
+                        <td><g:link action="show" id="${recipientListInstance.id}">${fieldValue(bean: recipientListInstance, field: "name")}</g:link></td>
+
+                    </tr>
+                </g:each>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <g:paginate total="${recipientListInstanceCount ?: 0}" />
+            </div>
+        </div>
+    </body>
+</html>
+
 					

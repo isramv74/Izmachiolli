@@ -3,14 +3,14 @@ package izmachiolli
 class Subscriber {
 
     static constraints = {
-        email blank: false, email: true
-        name blank: false
+        email email: true
     }
 
     static mapping = {
         id generator: 'increment',name:'id'
     }
 
+    static belongsTo = [rL:RecipientList]
     Integer id
     //Integer userId
     String name

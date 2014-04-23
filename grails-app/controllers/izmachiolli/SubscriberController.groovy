@@ -12,7 +12,7 @@ class SubscriberController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Subscriber.list(params), model:[subscriberInstanceCount: Subscriber.count()]
+        respond Subscriber.findAllByRL(session.getAttribute("rL"),params), model:[subscriberInstanceCount: Subscriber.count()]
     }
 
     def show(Subscriber subscriberInstance) {
@@ -40,7 +40,7 @@ class SubscriberController {
         request.withFormat {
             form {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'subscriberInstance.label', default: 'Subscriber'), subscriberInstance.id])
-                redirect subscriberInstance
+                redirect subscriberInstance,rl:subscriberInstance.rL.id
             }
             '*' { respond subscriberInstance, [status: CREATED] }
         }
@@ -100,5 +100,9 @@ class SubscriberController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    def showAll(){
+
     }
 }

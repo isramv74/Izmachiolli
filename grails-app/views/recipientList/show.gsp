@@ -163,9 +163,9 @@
 				<fieldset class="buttons">
 					<g:link class="edit" action="edit" resource="${recipientListInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                    <g:link class="create" action="addSusc" resource="${recipientListInstance}"><g:message code="recipientList.button.addSusc.label"  /></g:link>
-                    <g:link class="create" action="deleteSusc" resource="${recipientListInstance}"><g:message code="recipientList.button.deleteSusc.label" /></g:link>
-                </fieldset>
+                    <g:link class="create" action="index" controller="subscriber"><g:message code="recipientList.button.showSusc.label"  /></g:link>
+                    <g:set var="rL" value="${recipientListInstance}" scope="session" />
+                 </fieldset>
 			</g:form>
 		</div>
 	</body>
