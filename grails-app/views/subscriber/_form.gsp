@@ -1,5 +1,5 @@
 <%@ page import="izmachiolli.Subscriber" %>
-
+<g:hiddenField name="rL" value="$session.rL.id"/>
 <div class="fieldcontain ${hasErrors(bean: subscriberInstance, field: 'name', 'error')} ">
     <label for="name">
         <g:message code="subscriber.name.label" default="Name" />
