@@ -14,6 +14,7 @@
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+                <li><g:link class="create" action="createFromFile"><g:message code="subscriber.button.createFromFile"  /></g:link></li>
 			</ul>
 		</div>
 		<div id="list-subscriber" class="content scaffold-list" role="main">
@@ -33,12 +34,10 @@
 				<g:each in="${subscriberInstanceList}" status="i" var="subscriberInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${subscriberInstance.id}">${fieldValue(bean: subscriberInstance, field: "name")}${fieldValue(bean: subscriberInstance, field: "rL")}</g:link></td>
-					
+						<td><g:link action="show" id="${subscriberInstance.id}">${fieldValue(bean: subscriberInstance, field: "name")}</g:link></td>
+                        <td>${fieldValue(bean: subscriberInstance, field: "email")}</td>
 						<td><g:formatDate date="${subscriberInstance.joinDate}" /></td>
-					
-						<td>${fieldValue(bean: subscriberInstance, field: "email")}</td>
-					
+
 					</tr>
 				</g:each>
 				</tbody>

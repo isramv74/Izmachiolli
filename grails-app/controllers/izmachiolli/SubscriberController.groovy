@@ -25,10 +25,12 @@ class SubscriberController {
 
     @Transactional
     def save(Subscriber subscriberInstance) {
+
         if (subscriberInstance == null) {
             notFound()
             return
         }
+        subscriberInstance.rL=session.getAttribute("rL");
 
         if (subscriberInstance.hasErrors()) {
             respond subscriberInstance.errors, view:'create'
@@ -40,7 +42,7 @@ class SubscriberController {
         request.withFormat {
             form {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'subscriberInstance.label', default: 'Subscriber'), subscriberInstance.id])
-                redirect subscriberInstance,rl:subscriberInstance.rL.id
+                redirect subscriberInstance
             }
             '*' { respond subscriberInstance, [status: CREATED] }
         }
@@ -103,6 +105,10 @@ class SubscriberController {
     }
 
     def showAll(){
+
+    }
+
+    def createFromFile(){
 
     }
 }
