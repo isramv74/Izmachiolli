@@ -1,6 +1,6 @@
 package izmachiolli
 
-
+import liquibase.util.csv.CSVReader
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -109,6 +109,21 @@ class SubscriberController {
     }
 
     def createFromFile(){
+
+    }
+
+    def saveFromCSV(){
+        def f = request.getFile('myFile')
+        if (f.empty) {
+            flash.message = 'file cannot be empty'
+            render(view: 'createFromFile')
+            return
+        }
+
+        f.inputStream.eachCsvLine { tokens ->
+            save(new Subscriber(tokens[0],tokens[1],new Date()))
+            println("ash: save "+tokens[0])
+        }
 
     }
 }

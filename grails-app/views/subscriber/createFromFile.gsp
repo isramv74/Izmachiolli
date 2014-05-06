@@ -25,8 +25,8 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-            <g:uploadForm action="upload">
-                <input type="file" name="myFile" />
+            <g:uploadForm action="saveFromCSV">
+                <input type="file" name="myFile" accept=".csv" />
                 <input type="submit" />
             </g:uploadForm>
 

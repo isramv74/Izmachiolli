@@ -2,6 +2,12 @@ package izmachiolli
 
 class Subscriber {
 
+    Subscriber(String n,String em,Date d){
+        name=n
+        email=em
+        joinDate=d
+    }
+
     static constraints = {
         email email: true
     }
