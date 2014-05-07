@@ -114,16 +114,24 @@ class SubscriberController {
 
     def saveFromCSV(){
         def f = request.getFile('myFile')
+        def err=false
         if (f.empty) {
-            flash.message = 'file cannot be empty'
+            flash.message = message(code: 'default.file.empty')
             render(view: 'createFromFile')
             return
         }
 
         f.inputStream.eachCsvLine { tokens ->
-            save(new Subscriber(tokens[0],tokens[1],new Date()))
-            println("ash: save "+tokens[0])
+            def subsc=new Subscriber(tokens[0],tokens[1],new Date())
+            subsc.rL=session.getAttribute("rL");
+            subsc.validate()
+            if(subsc.hasErrors()){
+                err=true
+            }else{
+                subsc.save flush:true
+            }
         }
-
+        if(err) flash.message=message(code: 'subscriber.file.errors')
+        redirect(action: "index")
     }
 }
